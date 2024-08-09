@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} home page {% endblock %}
+
+{% block content %}
+    <form action="">
+        <div class="form-control">
+            <label for="uname">username</label>
+            <input type="text" name="username" id="uname">
+        </div>
+        <div class="form-control">
+            <label for="email">email</label>
+            <input type="email" name="email" id="email">
+        </div>
+        <div class="form-control">
+            <label for="password">password</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div class="form-control">
+            <label for="password2">confirm password</label>
+            <input type="password" name="password2" id="password2">
+        </div>
+    </form>
+{% endblock %}
