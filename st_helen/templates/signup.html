@@ -4,7 +4,12 @@
 {% block title %} home page {% endblock %}
 
 {% block content %}
-    <form action="">
+    <form action="" method="POST"> 
+        {% for message in messages %}
+        <p>{{messages}}</p>
+        {% endfor %}
+
+        {% csrf_token %} <!-- prevents it getting hacked -->
         <div class="form-control">
             <label for="uname">username</label>
             <input type="text" name="username" id="uname">
@@ -20,6 +25,9 @@
         <div class="form-control">
             <label for="password2">confirm password</label>
             <input type="password" name="password2" id="password2">
+        </div>
+        <div class="btn_container"> 
+            <button type="submit">register</button>
         </div>
     </form>
 {% endblock %}
