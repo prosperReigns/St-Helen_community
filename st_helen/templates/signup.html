@@ -6,7 +6,7 @@
 {% block content %}
     <form action="" method="POST"> 
         {% for message in messages %}
-        <p>{{messages}}</p>
+        <p>{{message}}</p>
         {% endfor %}
 
         {% csrf_token %} <!-- prevents it getting hacked -->

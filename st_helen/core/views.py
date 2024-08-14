@@ -28,7 +28,7 @@ def signup(request):
                 user = User.objects.create_user(username=username, email=email, password=password) #creates a user in the database
                 user.save()
                 #log user in
-                user_login = auth.authenticate(username=email, password=password)
+                user_login = auth.authenticate(username=username, password=password)
                 auth.login(request, user_login)
 
                 user_model = User.objects.get(username=username) #gets the username of the new user 
