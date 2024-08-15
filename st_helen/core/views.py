@@ -44,7 +44,27 @@ def signup(request):
         return render(request, 'signup.html')
 
 def login(request):
-    return render(request, 'login.html')
+    if request.method = "POST":
+
+        if password == password2: #checking if passwords are equal (validation)
+            if User.objects.filter(email=email).exists() and User.objects.filter(username=username).exists(): 
+               user_login = auth.authenticate(username=username, password=password)
+               auth.login(request, user_login)
+
+            elif username == "": #checks if username is empty
+                messages.info(request, "Username cannot be empty")
+                return redirect("signup")
+            else:
+                return redirect("login") #edit later 
+
+        else:
+            messages.info(request, "Password does not match") #*
+            return redirect("login")
+
+    else:
+        return render(request, 'login.html')
+
+
 
 def logout(request):
     return render(request, 'logout.html')
