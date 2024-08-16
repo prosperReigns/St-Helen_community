@@ -6,6 +6,7 @@
     <title>{% block title %} {% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'core/sytle1.css' %}">
+    {% block style %} {% endblock %}
 </head>
 <body>
     {% block content %} {% endblock %}

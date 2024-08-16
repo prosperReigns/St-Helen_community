@@ -2,8 +2,34 @@
 {% load static %}
 
 {% block title %} home page {% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'core/post_style.css' %}">
+{% endblock %}
+
 
 {% block content %}
-    <h1>Home</h1>
-    <p>Welcome to the home page!</p>
+    <div class="nav">
+        <a href="">post</a>
+        <a href="">account settings</a>
+    </div>
+
+    <div class="post_feed">
+        <div class="post_header">
+            <a href="#">username</a>
+            <a href="#">...</a>
+        </div>
+        <div class="post_image">
+            <img src="" alt="">
+        </div>
+        <div class="post_options">
+            <p>like</p>
+            <p>share</p>
+            <p>comment</p>
+        </div>
+        <div class="post_comment">
+            <p>hello</p>
+            <p>hello</p>
+            <p>hello</p>
+        </div>
+    </div>
 {% endblock %}

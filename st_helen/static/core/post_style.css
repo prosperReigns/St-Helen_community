@@ -1,0 +1,40 @@
+.post_feed{
+    width: 80%;
+    margin-inline: auto;
+    background-color: white;
+}
+
+.post_header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 15px;
+}
+
+.post_image{
+    width: 100%;
+    height: 300px;
+}
+
+.post_image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post_options{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+}
+
+.post_comment{
+    color: black;
+}
+
+.post_comment p{
+    color: black;
+    border-bottom: 1px solid #333;
+    padding: 10px 15px;
+}
+
