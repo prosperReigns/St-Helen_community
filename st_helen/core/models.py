@@ -13,7 +13,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=100, blank=True)
 
 class Posts(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4) #keep track of number of posts 
     user = models.CharField(max_length=100)
     image = models.ImageField(upload_to="post_images")
     caption = models.TextField()

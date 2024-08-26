@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import Profile #imports Profile from the current directory
+from .models import Profile, Posts #imports Profile and Posts from the current directory
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 @login_required(login_url="login") #redirects to login page if someone tries to access the home page
 def index(request):
-    return render(request, 'index.html')
+    post=Posts.objects.all()
+    return render(request, 'index.html', {"posts":post})
 
 def signup(request):
     if request.method == "POST": #python checks if it is a post method (validation)
@@ -95,3 +96,15 @@ def settings(request):
         return redirect ("settings")
 
     return render(request, "settings.html", {"user_profile": user_profile}) #passing user profile as an object to the html (frontend)
+
+@login_required(login_url="login")
+def upload(request):
+    if request.method == "POST":
+        user = request.user.username
+        post_image = request.FILES.get("post_image")
+        caption = request.POST["caption"]
+        new_post = Posts.objects.create(user=user, image=post_image, caption=caption)
+        new_post.save()
+        return redirect("/") #returns to the homepage
+    else:
+        return redirect("/")

@@ -7,7 +7,7 @@
 <h3> <a href="/">home</a> / account settings for {{user.username}} </h3>
 
 <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+    {% csrf_token %} <!-- prevents an attack, communicates between back and front end-->
     {% for message in messages %} 
     <p>{{message}}</p> 
     {% endfor %}

@@ -13,23 +13,33 @@
         <a href="">account settings</a>
     </div>
 
+    <form action="upload" method="POST" enctype="multipart/form-data"> <!--creating the post form-->
+        {% csrf_token %} <!-- add underneath a form-->
+        <input type="file" name="post_image">
+        <textarea name="caption" id="caption" placeholder="caption"> </textarea>
+        <button type="submit">Upload</button>
+
+    </form>
+
     <div class="post_feed">
+        {% for post in posts %}
         <div class="post_header">
-            <a href="#">username</a>
+            <a href="#">@{{post.user}}</a> <!-- references the user's username when they make the post-->
             <a href="#">...</a>
         </div>
         <div class="post_image">
-            <img src="" alt="">
+            <img src ="{{post.image.url}}" alt= ""> 
         </div>
         <div class="post_options">
-            <p>like</p>
-            <p>share</p>
-            <p>comment</p>
+            <p><a href>like</a></p> <!-- anchor tag allows people to click on the button -->
+            <p><a href>share</a></p>
+            <p><a href>comment</a></p>
         </div>
         <div class="post_comment">
             <p>hello</p>
             <p>hello</p>
             <p>hello</p>
         </div>
+        {% endfor %} <!-- loops for every post made-->
     </div>
 {% endblock %}
