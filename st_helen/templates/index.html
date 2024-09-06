@@ -28,10 +28,17 @@
             <a href="#">...</a>
         </div>
         <div class="post_image">
-            <img src ="{{post.image.url}}" alt= ""> 
+            <img src ="" alt= ""> 
         </div>
         <div class="post_options">
-            <p><a href>like</a></p> <!-- anchor tag allows people to click on the button -->
+            <p><a href="/like_post?post_id={{post.id}}">like</a></p> <!-- anchor tag allows people to click on the button -->
+            {% if post.no_of_likes == 0 %}
+            <p>No likes</p>
+            {% elif post.no_of_likes < 0 %}
+            <p>No likes</p>
+            {% else %}
+            <p>Liked by {{post.no_of_likes}} people</p>
+            {% endif %}
             <p><a href>share</a></p>
             <p><a href>comment</a></p>
         </div>

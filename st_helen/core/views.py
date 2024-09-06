@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import Profile, Posts #imports Profile and Posts from the current directory
+from .models import Profile, Posts, LikePost #imports Profile, LikePost and Posts from the current directory
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -108,3 +108,20 @@ def upload(request):
         return redirect("/") #returns to the homepage
     else:
         return redirect("/")
+
+@login_required(login_url="login")
+def like_post(request):
+    username = request.user.username #get the correct user profile
+    post_id = request.GET.get("post_id")
+    posts = Posts.objects.get(id=post_id)
+    like_filter = LikePost.objects.filter(post_id=post_id, username=username).first() #check if a user has liked a post 
+    if like_filter == None:
+        new_like = LikePost.objects.create(post_id=post_id, username=username) #ensures a user cannot like a post twice 
+        posts.no_of_likes = posts.no_of_likes + 1 #adds 1 to the number of likes
+        new_like.save()
+        return redirect("/") #returns to the homepage
+    else: 
+        like_filter.delete()
+        posts.no_of_likes = posts.no_of_likes - 1 #removes a like from the post
+        posts.save()
+        return redirect ("/") 
