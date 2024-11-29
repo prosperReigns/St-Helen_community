@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .models import Profile, Posts, LikePost #imports Profile, LikePost and Posts from the current directory
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout as auth_logout 
 
 # Create your views here.
 @login_required(login_url="login") #redirects to login page if someone tries to access the home page
@@ -18,6 +19,10 @@ def signup(request):
         password2 = request.POST["password2"]
 
         if password == password2: #checking if passwords are equal (validation)
+            if not email.endswith("@sthelens.london"):
+                messages.info(request, "Must be a St Helen's student to sign up") #checks if user is a student 
+                return redirect("signup")
+
             if User.objects.filter(email=email).exists(): #checking the email does not already exist in the database (that django created called objects)
                 messages.info(request, "Email taken") #gives a message to the user
                 return redirect("signup") #reloads the page
@@ -37,7 +42,7 @@ def signup(request):
                 user_model = User.objects.get(username=username) #gets the username of the new user 
                 new_profile = Profile.objects.create(user=user_model)
                 new_profile.save()
-                return redirect("login") #edit later 
+                return redirect("/") #edit later 
 
         else:
             messages.info(request, "Password does not match") #*
@@ -58,15 +63,15 @@ def login(request):
                 return redirect("/")
             else:
                 messages.info(request, "Invalid credentials") #user doesn't exist message 
-                return redirect("signup")
+                return redirect("login")
 
     else:
         return render(request, 'login.html')
 
 @login_required(login_url="login") #only accessible if you're logged in
 def logout(request):
-    auth.logout(request)
-    return render(request, 'logout.html')
+    auth.logout(request) #logs the user out 
+    return redirect (login) #redirects to the signup page 
 
 def settings(request):
     try:

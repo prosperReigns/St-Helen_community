@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} home page {% endblock %}
+{% block title %} Sign Up {% endblock %}
 
 {% block content %}
+    <h1 style="text-align: center; margin-top: 20px; color:darkcyan;">Sign Up</h1>
+    <p style="text-align:center; color:black;">Create an account to get started</p>
     <form action="" method="POST"> 
         {% for message in messages %}
-        <p>{{message}}</p>
+        <p style="color:red; text-align:center;font-weight: bold; font-family: ;">{{message}}</p>
         {% endfor %}
 
         {% csrf_token %} <!-- prevents it getting hacked -->

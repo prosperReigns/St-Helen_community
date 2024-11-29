@@ -9,8 +9,10 @@
 
 {% block content %}
     <div class="nav">
-        <a href="">post</a>
-        <a href="">account settings</a>
+        <a href="">post</a> <!-- add a post function -->
+        <button type="button" onclick="window.location.href='/settings'">settings</button>
+        <button type="button" onclick="window.location.href='/logout'">logout</button>
+        <h3> {{user.username}}'s account </h3>
     </div>
 
     <form action="upload" method="POST" enctype="multipart/form-data"> <!--creating the post form-->
