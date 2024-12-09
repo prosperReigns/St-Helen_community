@@ -4,6 +4,7 @@
 {% block title %} home page {% endblock %}
 {% block style %}
 <link rel="stylesheet" href="{% static 'core/post_style.css' %}">
+<link rel="stylesheet" href="{% static 'core/style.css' %}">
 {% endblock %}
 
 
@@ -12,6 +13,7 @@
         <a href="">post</a> <!-- add a post function -->
         <button type="button" onclick="window.location.href='/settings'">settings</button>
         <button type="button" onclick="window.location.href='/logout'">logout</button>
+        <h1>St Helen's School</h1>
         <h3> {{user.username}}'s account </h3>
     </div>
 

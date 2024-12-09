@@ -4,31 +4,43 @@
 {% block title %} Sign Up {% endblock %}
 
 {% block content %}
-    <h1 style="text-align: center; margin-top: 20px; color:darkcyan;">Sign Up</h1>
-    <p style="text-align:center; color:black;">Create an account to get started</p>
+    <h1>Sign Up</h1>
+    <h2>Create an account to get started</h2>
     <form action="" method="POST"> 
         {% for message in messages %}
-        <p style="color:red; text-align:center;font-weight: bold; font-family: ;">{{message}}</p>
+        <p style="color:red; text-align:center;font-weight: bold; font-family: 'DM Sans', Helvetica, sans-serif;">{{message}}</p>
         {% endfor %}
 
+       
         {% csrf_token %} <!-- prevents it getting hacked -->
         <div class="form-control">
             <label for="uname">username</label>
             <input type="text" name="username" id="uname">
         </div>
+        <p></p>
+
+
         <div class="form-control">
             <label for="email">email</label>
             <input type="email" name="email" id="email">
         </div>
+        <p></p>
+
+        
         <div class="form-control">
             <label for="password">password</label>
             <input type="password" name="password" id="password">
         </div>
+        <p></p>
+
+        
         <div class="form-control">
             <label for="password2">confirm password</label>
             <input type="password" name="password2" id="password2">
         </div>
 
+        <p> </p>
+      
         <div class="form-control">
             <button type="submit">register</button>
         </div>

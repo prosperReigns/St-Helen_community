@@ -35,7 +35,7 @@ def signup(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password) #creates a user in the database
                 user.save()
-                #log user in
+                #log user in as soon as they signup
                 user_login = auth.authenticate(username=username, password=password)
                 auth.login(request, user_login)
 
@@ -50,6 +50,14 @@ def signup(request):
 
     else:
         return render(request, 'signup.html')
+    
+
+@login_required
+def quiz(request):
+    if request.method == "POST": #will be sending information to the database
+        form
+
+
 
 def login(request):
     if request.method == "POST": #POST methods send data from the client to the server 
