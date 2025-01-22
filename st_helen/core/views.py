@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import Profile, Posts, LikePost #imports Profile, LikePost and Posts from the current directory
+from .models import Profile, Posts, LikePost, Question, Option, Response #imports Profile, LikePost, Posts, Questions, Option and Response from the current directory
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout 
 
@@ -42,7 +42,7 @@ def signup(request):
                 user_model = User.objects.get(username=username) #gets the username of the new user 
                 new_profile = Profile.objects.create(user=user_model)
                 new_profile.save()
-                return redirect("/") #edit later 
+                return redirect("quiz") #redirects the user to the quiz/assessment view
 
         else:
             messages.info(request, "Password does not match") #*
@@ -54,9 +54,31 @@ def signup(request):
 
 @login_required
 def quiz(request):
-    if request.method == "POST": #will be sending information to the database
-        form
+    questions = Question.objects.all().order_by("id") # gets all the questions and orders them in ascending order
+    user = request.user #track who takes the quiz
 
+    if request.method == "POST": #will be sending information to the database
+        question_id = request.POST.get("question_id")
+        chosen_option = request.POST.get("chosen_option")
+
+        question = Question.objects.get(id=question_id) #getting the corresponding question and option from the database
+        chosen_option = Option.objects.get(id=chosen_option)
+
+        Response.objects.update_or_create( #overwrites an existing record or creates a new one
+            user = user, 
+            question = question,
+            defaults = {"option" : chosen_option}
+        )
+
+        next_question_id = question.id + 1 #increments the ID 
+        next_question = Question.objects.filter(id=next_question_id).first()
+
+        if next_question:
+            return render(request, "quiz.html", {"question": next_question}) #if there are more questions
+        else:
+            return render(request, "quiz_complete.html") #goes to the complete page (will add later)
+        
+    return render(request, "quiz.html", {"question": Question.objects.first()}) 
 
 
 def login(request):

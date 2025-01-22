@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 import uuid
 from datetime import datetime
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -27,3 +28,27 @@ class LikePost(models.Model):
 class FollowerCount(models.Model): 
     followers = models.CharField(max_length=100)
     user = models.CharField(max_length=100)
+
+class Question(models.Model):
+    created_at = models.DateTimeField(default=datetime.now)
+    question = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.question #returns a string representation of any object in the Questions model
+
+class Option(models.Model):
+    created_at = models.DateTimeField(default=datetime.now)
+    option = models.CharField(max_length=200, blank=True)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="options") #creates one to many relationship with questions to options 
+
+    def __str__(self):
+        return self.option
+
+class Response(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE) #signifies a many to one relationship (many responses can be tied to one user)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    option = models.ForeignKey(Option, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return f"{self.user} answered '{self.option}' to '{self.question}'" #gives a string answer displaying the user and the response to a question
