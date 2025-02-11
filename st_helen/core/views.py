@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import Profile, Posts, LikePost, Question, Option, Response #imports Profile, LikePost, Posts, Questions, Option and Response from the current directory
+from .models import Profile, Posts, LikePost, Question, Option, Response, Student #imports Profile, LikePost, Posts, Questions, Option and Response from the current directory
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout 
+from .functions.matching import calculate_match_score
 
 # Create your views here.
 @login_required(login_url="login") #redirects to login page if someone tries to access the home page
@@ -35,6 +36,9 @@ def signup(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password) #creates a user in the database
                 user.save()
+
+                Student.objects.create(user=user)
+
                 #log user in as soon as they signup
                 user_login = auth.authenticate(username=username, password=password)
                 auth.login(request, user_login)
@@ -55,7 +59,7 @@ def signup(request):
 @login_required
 def quiz(request):
     questions = Question.objects.all().order_by("id") # gets all the questions and orders them in ascending order
-    user = request.user #track who takes the quiz
+    student = request.user.student #track who takes the quiz
 
     if request.method == "POST": #will be sending information to the database
         question_id = request.POST.get("question_id")
@@ -65,7 +69,7 @@ def quiz(request):
         chosen_option = Option.objects.get(id=chosen_option)
 
         Response.objects.update_or_create( #overwrites an existing record or creates a new one
-            user = user, 
+            student = student, 
             question = question,
             defaults = {"option" : chosen_option}
         )
@@ -160,3 +164,31 @@ def like_post(request):
         posts.no_of_likes = posts.no_of_likes - 1 #removes a like from the post
         posts.save()
         return redirect ("/") 
+
+
+@login_required(login_url="login")
+def connect(request):
+    current_student = request.user.student #retrieves the current user
+    current_student_responses = Response.objects.filter(student=current_student) #gets all the user's responses 
+
+    other_responses = Response.objects.exclude(student=current_student) #gets all other responses except the user's
+
+    matches = [] #creates the matches list 
+
+    for response in other_responses:
+        student_response = current_student_responses.filter(question=response.question).first() #filters responses based on the question 
+
+        if student_response: #if the student has answered 
+            score = calculate_match_score(student_response,response) #calls the matching algorithm 
+
+            if score>=3: #only show a match if they have a score greater than 3 
+                matched_student = response.student 
+                matches.append ({
+                    'student':matched_student,
+                    'score':score
+                }) #adds the user to the matches list 
+
+    matches = sorted(matches, key=lambda x:x['score'], reverse=True) #sorts the list in descending order so matches go by highest to lowest 
+
+    return render (request, "connect.html", {'matches':matches})
+

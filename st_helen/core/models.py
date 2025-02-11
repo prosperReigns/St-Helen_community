@@ -45,10 +45,16 @@ class Option(models.Model):
         return self.option
 
 class Response(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE) #signifies a many to one relationship (many responses can be tied to one user)
+    student = models.ForeignKey("Student", on_delete=models.CASCADE, null=True, default=None) #signifies a many to one relationship (many responses can be tied to one user)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     option = models.ForeignKey(Option, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
-        return f"{self.user} answered '{self.option}' to '{self.question}'" #gives a string answer displaying the user and the response to a question
+        return f"{self.student} answered '{self.option}' to '{self.question}'" #gives a string answer displaying the user and the response to a question
+
+class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.user}"
