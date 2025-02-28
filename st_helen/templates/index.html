@@ -5,52 +5,23 @@
 {% block style %}
 <link rel="stylesheet" href="{% static 'core/post_style.css' %}">
 <link rel="stylesheet" href="{% static 'core/style.css' %}">
+<link rel="stylesheet" href="{% static 'core/nav.css' %}">
 {% endblock %}
 
 
 {% block content %}
-    <div class="nav">
-        <a href="">post</a> <!-- add a post function -->
-        <button type="button" onclick="window.location.href='/settings'">settings</button>
-        <button type="button" onclick="window.location.href='/logout'">logout</button>
-        <h1>St Helen's School</h1>
-        <h3> {{user.username}}'s account </h3>
+<div class="topnav"> 
+    <h1>My St Helen's</h1>
+    <div class="button-container"> <!--button container class to attribute common features-->
+        <button class="button discoverbutton" onclick="window.location.href='/discover'">Discover</button> <!--redirects to discover-->
+        <button class="button connectbutton" onclick="window.location.href='/connect'">Connect</button> <!-- redirects to connect-->
+        <button class="button makepostbutton">Make a post</button> <!--make post button (no added functionality)-->
+        <button class="profileicon" onclick="window.location.href='/settings'"><i class ="fa-solid fa-user"></i></button><!--profile icon-->
     </div>
+</div>
+<p></p>
+<div class ="topnav2">
+    <p> {{user.username}}'s account </p> <!--displays the user's account name for recognition purposes-->
+</div>
 
-    <form action="upload" method="POST" enctype="multipart/form-data"> <!--creating the post form-->
-        {% csrf_token %} <!-- add underneath a form-->
-        <input type="file" name="post_image">
-        <textarea name="caption" id="caption" placeholder="caption"> </textarea>
-        <button type="submit">Upload</button>
-
-    </form>
-
-    <div class="post_feed">
-        {% for post in posts %}
-        <div class="post_header">
-            <a href="#">@{{post.user}}</a> <!-- references the user's username when they make the post-->
-            <a href="#">...</a>
-        </div>
-        <div class="post_image">
-            <img src ="" alt= ""> 
-        </div>
-        <div class="post_options">
-            <p><a href="/like_post?post_id={{post.id}}">like</a></p> <!-- anchor tag allows people to click on the button -->
-            {% if post.no_of_likes == 0 %}
-            <p>No likes</p>
-            {% elif post.no_of_likes < 0 %}
-            <p>No likes</p>
-            {% else %}
-            <p>Liked by {{post.no_of_likes}} people</p>
-            {% endif %}
-            <p><a href>share</a></p>
-            <p><a href>comment</a></p>
-        </div>
-        <div class="post_comment">
-            <p>hello</p>
-            <p>hello</p>
-            <p>hello</p>
-        </div>
-        {% endfor %} <!-- loops for every post made-->
-    </div>
 {% endblock %}

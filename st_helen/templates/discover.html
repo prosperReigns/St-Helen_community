@@ -2,8 +2,26 @@
 {% load static %}
 
 {% block title %} discover page {% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'core/post_style.css' %}">
+<link rel="stylesheet" href="{% static 'core/style.css' %}">
+<link rel="stylesheet" href="{% static 'core/nav.css' %}">
+{% endblock %}
+
 
 {% block content %}
-    
+<div class="topnav">
+    <h1>My St Helen's</h1>
+    <div class="button-container">
+        <button class="button discoverbutton" onclick="window.location.href='/discover'">Discover</button> 
+        <button class="button connectbutton" onclick="window.location.href='/connect'">Connect</button>
+        <button class="button homebutton" onclick="window.location.href='/'">Home</button>
+        <button class="profileicon" onclick="window.location.href='/settings'"><i class ="fa-solid fa-user"></i></button>
+    </div>
+</div>
+<p></p>
+<div class ="topnav2">
+    <p> {{user.username}}'s account </p>
+</div>
 
 {% endblock %}

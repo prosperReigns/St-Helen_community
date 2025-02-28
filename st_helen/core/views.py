@@ -174,21 +174,30 @@ def connect(request):
     other_responses = Response.objects.exclude(student=current_student) #gets all other responses except the user's
 
     matches = [] #creates the matches list 
+    viewed_students = [] #creates a list for students who have been searched already to prevent duplicates 
 
     for response in other_responses:
         student_response = current_student_responses.filter(question=response.question).first() #filters responses based on the question 
 
         if student_response: #if the student has answered 
-            score = calculate_match_score(student_response,response) #calls the matching algorithm 
+            score = calculate_match_score(current_student,response.student) #calls the matching algorithm 
 
-            if score>=3: #only show a match if they have a score greater than 3 
+            if score>=3 and response.student not in viewed_students: #only show a match if they have a score greater than 3 and they are not in the list already
                 matched_student = response.student 
-                matches.append ({
-                    'student':matched_student,
-                    'score':score
-                }) #adds the user to the matches list 
+                
+                if matched_student: #only if matched_student is valid
+                    matches.append ({
+                        'student':matched_student,
+                        'score':score
+                    }) #adds the user to the matches list 
+
+                    viewed_students.append(matched_student) #appends the student to the viewed list 
+
 
     matches = sorted(matches, key=lambda x:x['score'], reverse=True) #sorts the list in descending order so matches go by highest to lowest 
 
     return render (request, "connect.html", {'matches':matches})
 
+@login_required(login_url="login")
+def discover(request):
+    return render (request, 'discover.html')

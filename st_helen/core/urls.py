@@ -9,5 +9,7 @@ urlpatterns = [
     path("settings/", views.settings, name="settings"),
     path("upload", views.upload, name="upload"),
     path("like_post", views.like_post),
-    path("connect/", views.connect, name="connect")
+    path("connect/", views.connect, name="connect"),
+    path("discover/", views.discover, name="discover")
+
 ]

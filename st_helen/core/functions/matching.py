@@ -1,7 +1,7 @@
-from core.models import Response, User
+from core.models import Response, Student
 
 def get_responses (user):
-    responses = Response.objects.filter(user=user) #gets each response (from response model)
+    responses = Response.objects.filter(student=user) #gets each response (from response model)
     return{response.question_id: response.option_id for response in responses} #returns all the user's responses to each question in a dictionary 
 
 def calculate_match_score (student_a, student_b):
