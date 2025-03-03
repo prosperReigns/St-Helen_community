@@ -7,8 +7,8 @@ urlpatterns = [
     path("quiz/", views.quiz, name="quiz" ),
     path("logout/", views.logout, name="logout"),
     path("settings/", views.settings, name="settings"),
-    path("upload", views.upload, name="upload"),
-    path("like_post", views.like_post),
+    path("makepost", views.makepost, name="makepost"),
+    path("like_post", views.likepost),
     path("connect/", views.connect, name="connect"),
     path("discover/", views.discover, name="discover")
 

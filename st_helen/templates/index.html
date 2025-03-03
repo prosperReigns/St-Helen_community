@@ -15,7 +15,7 @@
     <div class="button-container"> <!--button container class to attribute common features-->
         <button class="button discoverbutton" onclick="window.location.href='/discover'">Discover</button> <!--redirects to discover-->
         <button class="button connectbutton" onclick="window.location.href='/connect'">Connect</button> <!-- redirects to connect-->
-        <button class="button makepostbutton">Make a post</button> <!--make post button (no added functionality)-->
+        <button class="button makepostbutton" onclick="togglePostForm()">Make a post</button> <!--make post button-->
         <button class="profileicon" onclick="window.location.href='/settings'"><i class ="fa-solid fa-user"></i></button><!--profile icon-->
     </div>
 </div>
@@ -24,7 +24,33 @@
     <p> {{user.username}}'s account </p> <!--displays the user's account name for recognition purposes-->
 </div>
 
+<div id ="postFormContainer" class="post-form-container">
+    <form action="{% url 'makepost' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image_upload" required>
+        <input type="text" name="caption" placeholder="Write a caption...">
+        <button type="submit">Post</button>
+    </form>
+    <button onclick="togglePostForm()" class="close-button">Cancel</button> <!--closes the form if they don't want to post-->
+</div>
+
 
 <p> Welcome to the home page of My St Helen's app</p>
 
+{% endblock %}
+
+
+{% block js %}
+<script>
+    function togglePostForm() {
+        var formContainer = document.getElementById("postFormContainer");
+    
+        // Checks if the form is currently hidden or not set
+        if (formContainer.style.display === "none" || formContainer.style.display === "") {
+            formContainer.style.display = "block"; // if it is then show the form
+        } else {
+            formContainer.style.display = "none"; // if it is showing, hide the form
+        }
+    }
+</script>
 {% endblock %}

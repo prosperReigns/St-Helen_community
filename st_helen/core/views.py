@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import Profile, Posts, LikePost, Question, Option, Response, Student #imports Profile, LikePost, Posts, Questions, Option and Response from the current directory
+from .models import Profile, Post, LikePost, Question, Option, Response, Student #imports LikePost, Posts, Questions, Option and Response from the current directory
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout 
 from .functions.matching import calculate_match_score
@@ -9,7 +9,7 @@ from .functions.matching import calculate_match_score
 # Create your views here.
 @login_required(login_url="login") #redirects to login page if someone tries to access the home page
 def index(request):
-    post=Posts.objects.all()
+    post=Post.objects.all()
     return render(request, 'index.html', {"posts":post})
 
 def signup(request):
@@ -107,6 +107,8 @@ def logout(request):
     auth.logout(request) #logs the user out 
     return redirect (login) #redirects to the signup page 
 
+
+@login_required(login_url="login") #only accessible if you're logged in
 def settings(request):
     try:
         user_profile = Profile.objects.get(user=request.user) #getting the information for the currently logged in user
@@ -135,35 +137,6 @@ def settings(request):
         return redirect ("settings")
 
     return render(request, "settings.html", {"user_profile": user_profile}) #passing user profile as an object to the html (frontend)
-
-@login_required(login_url="login")
-def upload(request):
-    if request.method == "POST":
-        user = request.user.username
-        post_image = request.FILES.get("post_image")
-        caption = request.POST["caption"]
-        new_post = Posts.objects.create(user=user, image=post_image, caption=caption)
-        new_post.save()
-        return redirect("/") #returns to the homepage
-    else:
-        return redirect("/")
-
-@login_required(login_url="login")
-def like_post(request):
-    username = request.user.username #get the correct user profile
-    post_id = request.GET.get("post_id")
-    posts = Posts.objects.get(id=post_id)
-    like_filter = LikePost.objects.filter(post_id=post_id, username=username).first() #check if a user has liked a post 
-    if like_filter == None:
-        new_like = LikePost.objects.create(post_id=post_id, username=username) #ensures a user cannot like a post twice 
-        posts.no_of_likes = posts.no_of_likes + 1 #adds 1 to the number of likes
-        new_like.save()
-        return redirect("/") #returns to the homepage
-    else: 
-        like_filter.delete()
-        posts.no_of_likes = posts.no_of_likes - 1 #removes a like from the post
-        posts.save()
-        return redirect ("/") 
 
 
 @login_required(login_url="login")
@@ -201,3 +174,40 @@ def connect(request):
 @login_required(login_url="login")
 def discover(request):
     return render (request, 'discover.html')
+
+
+@login_required(login_url="login")
+def makepost(request):
+    
+    if request.method == 'POST':
+        user = request.user #retrieves the username of the user from the form
+        image = request.FILES.get('image_upload') #retrieves the image to be posted from form
+        caption = request.POST["caption"] #retrieves the caption from the form
+
+        new_post = Post.objects.create(user=user, image=image, caption=caption) #creates a new post to the post model
+        new_post.save() #saves the post to the database
+
+        return redirect("/")
+    else:
+        return redirect("/")
+
+
+@login_required(login_url="login")
+def likepost(request):
+    username=request.user.username #gets username of logged in user
+    post_id=request.GET.get('post_id') #retrieves the post ID 
+
+    post = Post.objects.get(id=post_id)
+    like_filter=LikePost.objects.filter(post_id=post_id, username=username).first()
+
+    if like_filter == None: #if the user hasn't liked the post yet 
+        new_like=LikePost.objects.create(post_id=post_id, username=username) #creates a new like
+        new_like.save() 
+        post.no_of_likes=post.no_of_likes+1 #increments the number of likes by 1
+        post.save()
+        return redirect('/')
+    else: #if the user has already liked the post before 
+        like_filter.delete() #removes the like
+        post.no_of_likes=post.no_of_likes-1 #removes the like
+        post.save()
+        return redirect('/')

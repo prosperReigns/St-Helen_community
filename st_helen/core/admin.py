@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Profile,Posts,LikePost,Question, Option
+from .models import LikePost,Question, Option, Post, Response
 
 # Register your models here.
-admin.site.register(Profile)
-admin.site.register(Posts)
+admin.site.register(Post)
 admin.site.register(LikePost)
 admin.site.register(Question)
 admin.site.register(Option)
+admin.site.register(Response)

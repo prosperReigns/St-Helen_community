@@ -41,3 +41,7 @@ p{
     background-color: #146344;
     border:none;
 }
+
+#postFormContainer {
+    display: none;
+}
