@@ -21,10 +21,11 @@
 <p></p>
 <div class ="topnav2">
     <p> {{user.username}}'s account </p>
+    <a href="/logout">Log out</a>
+
 </div>
 <p></p>
 
-<div class="content-container">
 <h3> <a href="/">home</a> / account settings for {{user.username}} </h3>
 
 <form action="" method="POST" enctype="multipart/form-data">
@@ -51,6 +52,5 @@
    </div>
 
 </form>
-</div>
 
 {% endblock %}

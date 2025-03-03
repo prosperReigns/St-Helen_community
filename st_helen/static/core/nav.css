@@ -5,10 +5,6 @@ html, body {
     overflow-x: hidden;
 }
 
-.content-container {
-    padding-top: 80px; 
-}
-
 .topnav {
     display: flex;
     align-items: center;

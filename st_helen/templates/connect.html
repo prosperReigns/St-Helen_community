@@ -24,20 +24,20 @@
     <p> {{user.username}}'s account </p>
 </div>
 <p></p>
-<div class="content-container">
-    <h2>Your Matches</h2>
 
-        {% if matches %}
-            <ul>
-                {% for match in matches %}
-                    <li>
-                        <h3>{{ match.student.user.username }}</h3>
-                        <p>Score: {{ match.score }}</p>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No matches found.</p>
-        {% endif %}
+<h2>Your Matches</h2>
+
+    {% if matches %}
+        <ul>
+            {% for match in matches %}
+                <li>
+                    <h3>{{ match.student.user.username }}</h3>
+                    <p>Score: {{ match.score }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No matches found.</p>
+    {% endif %}
 </div>
 {% endblock %}
