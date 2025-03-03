@@ -9,7 +9,7 @@ from .functions.matching import calculate_match_score
 # Create your views here.
 @login_required(login_url="login") #redirects to login page if someone tries to access the home page
 def index(request):
-    post=Post.objects.all()
+    post=Post.objects.all().order_by("-created_at")
     return render(request, 'index.html', {"posts":post})
 
 def signup(request):

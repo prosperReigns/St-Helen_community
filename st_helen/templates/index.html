@@ -37,20 +37,19 @@
 
 <p> Welcome to the home page of My St Helen's app</p>
 
+{% for post in posts %}
+    <div class="post">
+        <img src="{{ post.image_upload.url }}" alt="Post image">
+        <p><strong>{{ post.user.username }}</strong></p>
+        <p>{{ post.caption }}</p>
+        <p>{{ post.created_at|date:"F d, Y H:i" }}</p>
+    </div>
+{% empty %}
+    <p>No posts yet. Be the first to post!</p>
+{% endfor %}
+
+
 {% endblock %}
 
 
-{% block js %}
-<script>
-    function togglePostForm() {
-        var formContainer = document.getElementById("postFormContainer");
-    
-        // Checks if the form is currently hidden or not set
-        if (formContainer.style.display === "none" || formContainer.style.display === "") {
-            formContainer.style.display = "block"; // if it is then show the form
-        } else {
-            formContainer.style.display = "none"; // if it is showing, hide the form
-        }
-    }
-</script>
-{% endblock %}
+

@@ -14,5 +14,19 @@
 </head>
 <body>
     {% block content %} {% endblock %}
+
+    <script>
+        function togglePostForm() {
+            var formContainer = document.getElementById("postFormContainer");
+            console.log('Toggling form visibility');  // Debug log
+    
+            if (formContainer.style.display === "none" || formContainer.style.display === "") {
+                formContainer.style.display = "block"; // Show the form
+            } else {
+                formContainer.style.display = "none"; // Hide the form
+            }
+        }
+    </script>
+
 </body>
 </html>
