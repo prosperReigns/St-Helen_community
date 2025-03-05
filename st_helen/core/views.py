@@ -194,14 +194,14 @@ def makepost(request):
 
 @login_required(login_url="login")
 def likepost(request):
-    username=request.user.username #gets username of logged in user
+    user=request.user #gets username of logged in user
     post_id=request.GET.get('post_id') #retrieves the post ID 
 
     post = Post.objects.get(id=post_id)
-    like_filter=LikePost.objects.filter(post_id=post_id, username=username).first()
+    like_filter=LikePost.objects.filter(post=post, user=user).first()
 
     if like_filter == None: #if the user hasn't liked the post yet 
-        new_like=LikePost.objects.create(post_id=post_id, username=username) #creates a new like
+        new_like=LikePost.objects.create(post=post, user=user) #creates a new like
         new_like.save() 
         post.no_of_likes=post.no_of_likes+1 #increments the number of likes by 1
         post.save()

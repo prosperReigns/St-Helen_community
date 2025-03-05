@@ -39,17 +39,23 @@
 
 {% for post in posts %}
     <div class="post">
-        <img src="{{ post.image_upload.url }}" alt="Post image">
-        <p><strong>{{ post.user.username }}</strong></p>
+        <img src="{{ post.image.url }}" alt="Post image">
+        <p>{{ post.user.username }}</p>
         <p>{{ post.caption }}</p>
-        <p>{{ post.created_at|date:"F d, Y H:i" }}</p>
+        <p>{{ post.created_at|date:"M d, Y" }}</p>
     </div>
+
+    <form action="{% url 'likepost' %}" method="GET"> 
+        <input type="hidden" name="post_id" value="{{post.id}}">
+        <button type="submit" class="likebutton"><i class="fa-solid fa-heart"></i> 
+        Like ({{post.no_of_likes}}) 
+        </button>
+    </form>
+
 {% empty %}
     <p>No posts yet. Be the first to post!</p>
 {% endfor %}
 
 
 {% endblock %}
-
-
 

@@ -44,27 +44,4 @@ p{
 
 #postFormContainer {
     display: none;
-    /* Added styling to make the form container look better */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.close-button {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 5px;
-}
-.close-button:hover {
-    background-color: #ff1a1a;
 }

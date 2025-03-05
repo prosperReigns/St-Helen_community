@@ -16,14 +16,13 @@
     {% block content %} {% endblock %}
 
     <script>
-        function togglePostForm() {
+        function togglePostForm() { //function to toggle the form when button is pressed (index.html)
             var formContainer = document.getElementById("postFormContainer");
-            console.log('Toggling form visibility');  // Debug log
     
             if (formContainer.style.display === "none" || formContainer.style.display === "") {
-                formContainer.style.display = "block"; // Show the form
+                formContainer.style.display = "block"; // if the form is hidden, then show the form when button is pressed 
             } else {
-                formContainer.style.display = "none"; // Hide the form
+                formContainer.style.display = "none"; // else hide the form
             }
         }
     </script>

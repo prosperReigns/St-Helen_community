@@ -11,7 +11,7 @@ urlpatterns = [
     path("logout/", views.logout, name="logout"),
     path("settings/", views.settings, name="settings"),
     path("makepost/", views.makepost, name="makepost"),
-    path("like_post/", views.likepost),
+    path("like_post/", views.likepost, name="likepost"),
     path("connect/", views.connect, name="connect"),
     path("discover/", views.discover, name="discover"),
 ]
