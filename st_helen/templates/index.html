@@ -35,25 +35,28 @@
 </div>
 
 
-<p> Welcome to the home page of My St Helen's app</p>
+<h2>Welcome to your feed</h2>
 
 {% for post in posts %}
-    <div class="post">
-        <img src="{{ post.image.url }}" alt="Post image">
-        <p>{{ post.user.username }}</p>
-        <p>{{ post.caption }}</p>
-        <p>{{ post.created_at|date:"M d, Y" }}</p>
+    <div class="posts">
+        <p class="username">@{{ post.user.username }}</p> <!--displays the poster's username at the top of the post-->
+        <img src="{{ post.image.url }}" alt="Post image"> <!--the posted image displayed next-->
+        
+        <form action="{% url 'likepost' %}" method="GET"> <!--calls the likepost view-->
+            <input type="hidden" name="post_id" value="{{post.id}}"> 
+            <button type="submit" class="likebutton"><i class="fa-solid fa-heart"></i> <!--heart icon from online library-->
+            Like ({{post.no_of_likes}}) <!--displays the number of likes-->
+            </button>
+        </form>
+        
+        <p class="username2">{{ post.user.username }}</p><p class="caption">{{ post.caption }}</p> <!--shows the poster's username again and their caption-->
+        <p class="date">{{ post.created_at|date:"M d, Y" }}</p> <!--shows the date in format month, date, year-->
+
+        
     </div>
 
-    <form action="{% url 'likepost' %}" method="GET"> 
-        <input type="hidden" name="post_id" value="{{post.id}}">
-        <button type="submit" class="likebutton"><i class="fa-solid fa-heart"></i> 
-        Like ({{post.no_of_likes}}) 
-        </button>
-    </form>
-
 {% empty %}
-    <p>No posts yet. Be the first to post!</p>
+    <p>No posts yet. Be the first to post!</p> <!--if there are no posts, put empty message-->
 {% endfor %}
 
 

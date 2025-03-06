@@ -1,40 +1,98 @@
-.post_feed{
-    width: 80%;
+.posts {
+    width: 60%;
     margin-inline: auto;
-    background-color: white;
+    background-color:#f2f2f2;
+    border-radius: 2%;
+    margin-bottom: 50px;
 }
 
-.post_header{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px 15px;
+.posts img {
+    width:100%;
+    padding-bottom: 10px;
 }
 
-.post_image{
-    width: 100%;
-    height: 300px;
+.posts .username {
+    text-align: left;
+    margin-left: 10px;
+    padding-top: 10px;
 }
 
-.post_image img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.posts .username2 {
+    text-align: left;
+    font-weight: bold;
+    display: inline;
+    margin-right: 5px;
+    margin-left:10px;
 }
 
-.post_options{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 15px;
+.posts .caption {
+    text-align: left;
+    display: inline;
+    margin-right: 5px;
 }
 
-.post_comment{
-    color: black;
+.posts .date {
+    text-align: left;
+    margin-left:10px;
+    font-size: x-small;
+    
 }
 
-.post_comment p{
-    color: black;
-    border-bottom: 1px solid #333;
-    padding: 10px 15px;
+.likebutton {
+    background-color:#e30c64;
+    border-color: white;
+    border-radius: 8px;
+    color: white;
+    padding: 6px 4px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'DM Sans', sans-serif;
+    margin-left: 9px;
+    margin-bottom: 5px;
 }
 
+.likebutton:hover {
+    background-color: #c00a52;   
+}
+
+
+/* makepost form */
+
+.post-form-container {
+    position: fixed; 
+    width: 200px; 
+    background-color:#e7e7e7;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 20px;
+    display: none; 
+    flex-direction: column; 
+    align-items: center;
+    z-index: 1000; 
+}
+
+.post-form-container input[type="file"],
+.post-form-container input[type="text"] {
+    width: 90%;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.post-form-container button {
+    width:100%;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #e30c64;
+    color: white;
+    border: none;
+}
+
+.post-form-container button:hover {
+    background-color: #c00a52;
+}
