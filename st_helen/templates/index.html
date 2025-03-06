@@ -15,7 +15,7 @@
     <div class="button-container"> <!--button container class to attribute common features-->
         <button class="button discoverbutton" onclick="window.location.href='/discover'">Discover</button> <!--redirects to discover-->
         <button class="button connectbutton" onclick="window.location.href='/connect'">Connect</button> <!-- redirects to connect-->
-        <button class="button makepostbutton" onclick="togglePostForm()">Make a post</button> <!--make post button-->
+        <button class="button makepostbutton" onclick="togglePostForm()">Post</button> <!--make post button-->
         <button class="profileicon" onclick="window.location.href='/settings'"><i class ="fa-solid fa-user"></i></button><!--profile icon-->
     </div>
 </div>
@@ -35,7 +35,7 @@
 </div>
 
 
-<h2>Welcome to your feed</h2>
+<h2>Welcome to your feed!</h2>
 
 {% for post in posts %}
     <div class="posts">
