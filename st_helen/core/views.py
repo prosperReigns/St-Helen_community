@@ -111,32 +111,24 @@ def logout(request):
 @login_required(login_url="login") #only accessible if you're logged in
 def settings(request):
     try:
-        user_profile = Profile.objects.get(user=request.user) #getting the information for the currently logged in user
+        user_profile = Profile.objects.get(user=request.user) #if the user already has a profile, retrieve this
     except Profile.DoesNotExist:
-        user_profile = Profile.objects.create(user=request.user)
+        user_profile = Profile.objects.create(user=request.user) #if they don't have a profile, create one
+
 
     if request.method == "POST":
-        if request.FILES.get("image") == None: #checking if user uploaded an image to see if we use the default or theirs
-            bio = request.POST["bio"]
-            location = request.POST["location"]
-            image = user_profile.profileimg
+        image = request.POST.get("image", user_profile.profileimg)
+        bio = request.POST.get("bio", "")
+        year_group = request.POST.get("year_group", user_profile.year_group)
 
-            user_profile.profileimg = image #updating the profile models with the required values 
-            user_profile.bio = bio
-            user_profile.location = location
-            user_profile.save()
-        if request.FILES.get("image") != None:
-            bio = request.POST["bio"]
-            location = request.POST["location"]
-            image = request.FILES.get("image")
-
-            user_profile.profileimg = image #updating the profile models with the required values 
-            user_profile.bio = bio
-            user_profile.location = location
-            user_profile.save()
+        user_profile.profileimg = image #save the uploaded image
+        user_profile.bio = bio #save the uploaded bio
+        user_profile.year_group = year_group #save the selected year group
+        user_profile.save() #update the user profile
+        
         return redirect ("settings")
 
-    return render(request, "settings.html", {"user_profile": user_profile}) #passing user profile as an object to the html (frontend)
+    return render(request, "settings.html", {"user_profile": user_profile, "YEAR_GROUP_CHOICES": Profile.YEAR_GROUP_CHOICES}) #passing user profile to the frontend
 
 
 @login_required(login_url="login")

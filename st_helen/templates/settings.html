@@ -26,30 +26,39 @@
 </div>
 <p></p>
 
-<h3> <a href="/">home</a> / account settings for {{user.username}} </h3>
+<h3> Account settings for {{user.username}} </h3>
 
 <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %} <!-- prevents an attack, communicates between back and front end-->
+    {% csrf_token %} <!--helps prevent malicious attacks by ensuring that form submissions come from this website-->
+    
     {% for message in messages %} 
     <p>{{message}}</p> 
     {% endfor %}
+
    <div class="form_control">
-    <img src="((user_profile.profileimg.url))" width="200px" height="200px">
-    <input type="file" name="image" value="{{user_profile.profileimg}}">
+    <img src="{{ user_profile.profileimg.url }}" width="200px" height="200px" alt="Profile Image">
+    <input type="file" name="image"> <!--input from user to update profile image-->
    </div>
 
    <div class="form_control">
-    <textarea name="bio" id="bio" placeholder="bio">{{user_profile.bio}}</textarea>
+    <textarea name="bio" id="bio" placeholder="Enter your bio">{{user_profile.bio}}</textarea> <!--allows user to enter bio-->
    </div>
 
    <div class="form_control">
-    <input type="text" name="location" id="location" placeholder="location" value="{{user_profile.location}}">
+    <label for="year_group">Year Group:</label> 
+    <select name="year_group" id="year_group">
+        {% for value, label in user_profile.YEAR_GROUP_CHOICES %} <!--for every value and label in YEAR_GROUP_CHOICES-->
+            <option value="{{ value }}" {% if user_profile.year_group == value %}selected{% endif %}>
+                {{ label }} <!--display the label as an option-->
+            </option>
+        {% endfor %}
+    </select>
    </div>
 
    <div class="btn-container">
-    <button type="submit">Cancel</button>
-    <button type="submit">Sumbit</button>
-   </div>
+    <button type="submit">Submit</button> <!--submit the form-->
+    <button type="button" onclick="window.location.href='/quiz'">Retake Quiz</button> <!--redirects to quiz-->
+</div>
 
 </form>
 

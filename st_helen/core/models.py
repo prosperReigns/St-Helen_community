@@ -26,10 +26,22 @@ class LikePost(models.Model):
         return f"{self.user} liked {self.post}"
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-    profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')
-    location = models.CharField(max_length=100, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE) #gets the user logged in
+    bio = models.TextField(blank=True) #each profile should contain a bio
+    profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png') #default profile image is blank
+
+    YEAR_GROUP_CHOICES = [
+        ('7', 'Year 7'),
+        ('8', 'Year 8'),
+        ('9', 'Year 9'),
+        ('10', 'Year 10'),
+        ('11', 'Year 11'),
+        ('12', 'Year 12'),
+        ('13', 'Year 13'),
+    ] #tuple to give a drop down list of year group choices, as per Django's language 
+
+    year_group = models.CharField(max_length=7, choices=YEAR_GROUP_CHOICES, blank=True, null=True)
+    #each profile should have the students actual year group/ a null value if not set 
 
     def __str__(self):
         return self.user.username
