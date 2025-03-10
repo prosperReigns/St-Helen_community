@@ -28,7 +28,7 @@ class LikePost(models.Model):
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) #gets the user logged in
     bio = models.TextField(blank=True) #each profile should contain a bio
-    profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png') #default profile image is blank
+    profileimg = models.ImageField(upload_to='profile_images', default='blank_profile_image.png') #default profile image is blank
 
     YEAR_GROUP_CHOICES = [
         ('7', 'Year 7'),

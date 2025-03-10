@@ -57,7 +57,7 @@ html, body {
 }
 
 .topnav .connectbutton:hover {
-    background-color: #acb5ac;
+    background-color:#c6a02d;
     color: white
 }
 
@@ -78,7 +78,7 @@ html, body {
 }
 
 .topnav .discoverbutton:hover {
-    background-color: #acb5ac;
+    background-color:#3e6788;
     color: white
 }
 
@@ -99,7 +99,7 @@ html, body {
 }
 
 .topnav .makepostbutton:hover {
-    background-color: #acb5ac;
+    background-color:#b75e35;
     color: white
 }
 
@@ -121,7 +121,7 @@ html, body {
 }
 
 .topnav .homebutton:hover {
-    background-color: #acb5ac;
+    background-color: #a00948;
     color: white
 }
 
@@ -129,7 +129,7 @@ html, body {
     font-family: 'DM Sans', sans-serif;
     font-weight:400;
     float: left;
-    margin-left: 10px;
+    margin-left: 5px;
     color: white
 }
 
@@ -142,4 +142,22 @@ html, body {
     padding-top: 75px;
     padding-bottom: 0%;
 
+}
+
+.topnav2 .logoutbutton {
+    background-color:#a46ba3;
+    border-color: white;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    float: right;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.topnav2 .logoutbutton:hover {
+    background-color: #855784;
+    color: white
 }

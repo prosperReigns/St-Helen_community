@@ -2,13 +2,16 @@ h1{
     color:#146344;
     font-family: 'DM Sans', sans-serif;
     text-align: center;
+    font-weight: 600;
+    font-size: xx-large;
 }
 
 h2{
     color:#acb5aced;
     font-family: 'DM Sans', sans-serif;
     text-align: center;
-    font-weight: 800;
+    font-weight: 600;
+    font-size: x-large;
 }
 
 h3{

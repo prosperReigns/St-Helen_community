@@ -3,8 +3,8 @@
 {% block title %} Profile settings {% endblock %}
 {% block style %}
 <link rel="stylesheet" href="{% static 'core/post_style.css' %}">
-<link rel="stylesheet" href="{% static 'core/style.css' %}">
 <link rel="stylesheet" href="{% static 'core/nav.css' %}">
+<link rel="stylesheet" href="{% static 'core/settings.css' %}">
 {% endblock %}
 
 
@@ -19,33 +19,33 @@
     </div>
 </div>
 <p></p>
+
 <div class ="topnav2">
     <p> {{user.username}}'s account </p>
-    <a href="/logout">Log out</a>
-
+    <button class="button logoutbutton" onclick="window.location.href='/logout'">Logout</button> 
 </div>
 <p></p>
 
-<h3> Account settings for {{user.username}} </h3>
+<h2> Account settings </h2>
+<hr>
+<p>General</p>
 
-<form action="" method="POST" enctype="multipart/form-data">
+<form class="settingsform" method="POST" enctype="multipart/form-data">
     {% csrf_token %} <!--helps prevent malicious attacks by ensuring that form submissions come from this website-->
-    
-    {% for message in messages %} 
-    <p>{{message}}</p> 
-    {% endfor %}
 
    <div class="form_control">
-    <img src="{{ user_profile.profileimg.url }}" width="200px" height="200px" alt="Profile Image">
+    <p>Profile Picture</p>
+    <img src="{{ user_profile.profileimg.url }}" alt="Profile Image">
     <input type="file" name="image"> <!--input from user to update profile image-->
    </div>
 
    <div class="form_control">
+    <p>Bio</p>
     <textarea name="bio" id="bio" placeholder="Enter your bio">{{user_profile.bio}}</textarea> <!--allows user to enter bio-->
    </div>
 
    <div class="form_control">
-    <label for="year_group">Year Group:</label> 
+    <p>Year Group</p>
     <select name="year_group" id="year_group">
         {% for value, label in user_profile.YEAR_GROUP_CHOICES %} <!--for every value and label in YEAR_GROUP_CHOICES-->
             <option value="{{ value }}" {% if user_profile.year_group == value %}selected{% endif %}>
@@ -56,8 +56,8 @@
    </div>
 
    <div class="btn-container">
-    <button type="submit">Submit</button> <!--submit the form-->
-    <button type="button" onclick="window.location.href='/quiz'">Retake Quiz</button> <!--redirects to quiz-->
+    <button class="submitbutton" type="submit">Save changes</button> <!--submit the form-->
+    <button class = "retakebutton" type="button" onclick="window.location.href='/quiz'">Retake Quiz</button> <!--redirects to quiz-->
 </div>
 
 </form>

@@ -117,7 +117,7 @@ def settings(request):
 
 
     if request.method == "POST":
-        image = request.POST.get("image", user_profile.profileimg)
+        image = request.FILES.get("image", user_profile.profileimg)
         bio = request.POST.get("bio", "")
         year_group = request.POST.get("year_group", user_profile.year_group)
 

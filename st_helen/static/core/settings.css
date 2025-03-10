@@ -1,0 +1,92 @@
+.settingsform {
+    background-color:#f2f2f2;
+    width: 60%;
+    border-radius: 2%;
+    margin-inline: auto;
+}
+
+p{
+    font-family: 'DM Sans', 'Helvetica', sans-serif;
+    text-align: left;
+    margin-left: 5%;
+    font-size: large;
+}
+
+hr {
+    width: 90%;
+}
+
+h2{
+    color:#acb5aced;
+    font-family: 'DM Sans', sans-serif;
+    font-size: x-large;
+    text-align: left;
+    font-weight: 600;
+    margin-left: 5%;
+}
+
+.form_control {
+    flex-direction: column;
+}
+
+.form_control p {
+    font-size: larger;
+    margin-left: 3%;
+    padding-top: 3%;
+}
+
+.form_control img {
+    width: 200px;
+    height:200px;
+    border-radius: 100px;
+    margin-left: 3%;
+}
+
+.form_control input[type="file"],
+.form_control textarea[name="bio"] {
+    width: 89%;
+    margin-left: 3%;
+    margin-right: 3%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form_control select {
+    margin-left: 3%;
+    font-size: medium;
+    font-family: 'DM Sans', Helvetica, sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn-container{
+    text-align: right;
+    padding-bottom: 3%;
+    margin-right: 3%;
+}
+
+.btn-container .submitbutton,
+.btn-container .retakebutton {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid white;
+    color: white;
+}
+
+.btn-container .submitbutton {
+    background-color:#146344;
+}
+
+.btn-container .retakebutton {
+    background-color:#acb5aced;
+}
+
+.btn-container .submitbutton:hover {
+    background-color:#0f4a32;
+}
+
+.btn-container .retakebutton:hover {
+    background-color:#949a94ed;
+}
