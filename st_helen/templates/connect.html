@@ -5,6 +5,7 @@
 {% block style %}
 <link rel="stylesheet" href="{% static 'core/post_style.css' %}">
 <link rel="stylesheet" href="{% static 'core/style.css' %}">
+<link rel="stylesheet" href="{% static 'core/match_style.css' %}">
 <link rel="stylesheet" href="{% static 'core/nav.css' %}">
 {% endblock %}
 
@@ -30,10 +31,15 @@
     {% if matches %}
         <ul>
             {% for match in matches %}
-                <li>
-                    <h3>{{ match.student.user.username }}</h3>
-                    <p>Score: {{ match.score }}</p>
-                </li>
+                <div class="match-card">
+                    {% if match.profileimg %} <!--if they have a profile image-->
+                        <img src="{{ match.profileimg }}" alt="Profile Image">
+                    {% endif %}
+                    <h3>@{{ match.username }}</h3>
+                    <p>{{ match.bio }}</p>
+                    <p><strong>Match score:</strong> <span class="score">{{ match.score }} <span class="tooltip">How likely you are to match on a scale of 1-10</span></span></p>
+                    <span class="email">Email: </span><a href="mailto:{{match.email}}?subject=We're a Match!&body=Hi, I saw we matched on __ and I'd love to connect!">{{match.email}}</a>
+                </div>
             {% endfor %}
         </ul>
     {% else %}

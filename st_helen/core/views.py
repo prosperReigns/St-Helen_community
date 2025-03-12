@@ -148,12 +148,18 @@ def connect(request):
             score = calculate_match_score(current_student,response.student) #calls the matching algorithm 
 
             if score>=3 and response.student not in viewed_students: #only show a match if they have a score greater than 3 and they are not in the list already
-                matched_student = response.student 
+                matched_student = response.student
+                matched_user = matched_student.user #retrieves the user information of the matched student
+                matched_profile = Profile.objects.get(user=matched_user) #retrieves that user's profile
                 
                 if matched_student: #only if matched_student is valid
                     matches.append ({
                         'student':matched_student,
-                        'score':score
+                        'score':score,
+                        'username':matched_user.username, #gets their username from user model
+                        'email':matched_user.email, #gets their email from user model
+                        'bio':matched_profile.bio, #gets their bio from profile model
+                        'profileimg':matched_profile.profileimg.url #gets their profileimg from profile model
                     }) #adds the user to the matches list 
 
                     viewed_students.append(matched_student) #appends the student to the viewed list 
