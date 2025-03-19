@@ -21,7 +21,7 @@
 </div>
 <p></p>
 <div class ="topnav2">
-    <p> {{user.username}}'s account </p>
+    <p><a href="{% url 'profile' user.username %}"> {{user.username}}'s profile </a></p>
 </div>
 
 {% endblock %}

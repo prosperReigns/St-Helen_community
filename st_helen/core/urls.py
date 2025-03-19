@@ -14,6 +14,7 @@ urlpatterns = [
     path("like_post/", views.likepost, name="likepost"),
     path("connect/", views.connect, name="connect"),
     path("discover/", views.discover, name="discover"),
+    path("profile/<str:username>/", views.profileview, name="profile")
 ]
 
 if settings.DEBUG:

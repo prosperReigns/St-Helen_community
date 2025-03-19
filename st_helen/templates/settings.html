@@ -21,7 +21,7 @@
 <p></p>
 
 <div class ="topnav2">
-    <p> {{user.username}}'s account </p>
+    <p><a href="{% url 'profile' user.username %}"> {{user.username}}'s profile </a></p>
     <button class="button logoutbutton" onclick="window.location.href='/logout'">Logout</button> 
 </div>
 <p></p>

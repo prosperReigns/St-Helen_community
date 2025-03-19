@@ -1,0 +1,56 @@
+.post-container {
+    display: grid;
+    grid-template-columns: repeat(3, 32.5%);
+    gap: 1.25%;
+    background-color: #f2f2f2;
+    border-radius: 5%;
+    margin-inline: auto;
+    width: 80%;
+    padding: 20px;
+}
+
+.post-container img {
+    width: 100%;
+    height: 80%; 
+    border-radius: 10px;
+}
+
+.post-container p {
+    font-size: small;
+}
+
+.post-container .time-created {
+    font-size: x-small;
+}
+
+.post-container .postitem {
+    flex-direction: column;
+    display: flex;
+}
+
+.profile-container img{ 
+    border-radius: 50%;
+    margin-left: 3%;
+    width: 140px;
+    height: 140px;
+    float: left; 
+    margin-right: 1%
+}
+
+.profile-container h3, .profile-container p {
+    font-style: normal;
+    text-align: left;
+    width: 80%;
+    margin-bottom: 0%;
+    margin-left: 10px;
+    margin-top: 1%;
+}
+
+.profile-container p {
+    font-size:large;
+}
+
+.profile-container .year-group {
+    font-weight: bold;
+    color:#e97642;
+}

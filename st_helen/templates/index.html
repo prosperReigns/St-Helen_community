@@ -21,7 +21,7 @@
 </div>
 <p></p>
 <div class ="topnav2">
-    <p> {{user.username}}'s account </p> <!--displays the user's account name for recognition purposes-->
+    <p><a href="{% url 'profile' user.username %}"> {{user.username}}'s profile </a></p>
 </div>
 
 <div id ="postFormContainer" class="post-form-container">
@@ -39,7 +39,7 @@
 
 {% for post in posts %}
     <div class="posts">
-        <p class="username">@{{ post.user.username }}</p> <!--displays the poster's username at the top of the post-->
+        <p class = "username"><a href="{% url 'profile' post.user.username %}">@{{ post.user.username }}</a></p><!--displays the poster's username at the top of the post-->
         <img src="{{ post.image.url }}" alt="Post image"> <!--the posted image displayed next-->
         
         <form action="{% url 'likepost' %}" method="GET"> <!--calls the likepost view-->

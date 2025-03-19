@@ -209,3 +209,16 @@ def likepost(request):
         post.no_of_likes=post.no_of_likes-1 #removes the like
         post.save()
         return redirect('/')
+
+@login_required(login_url="login")
+def profileview(request, username): #takes in the username of the user who's profile you want to see
+    user_object = User.objects.get(username=username) #creates an object of that user 
+    user_profile = Profile.objects.get(user=user_object) #gets that user's profile
+    user_posts = Post.objects.filter(user=user_object) #get all the posts posted by that user 
+
+    context = {
+        "user_object": user_object,
+        "user_profile": user_profile,
+        "user_posts": user_posts,
+    } #passes this code to the frontend for reference sake 
+    return render(request,'profile.html', context) 

@@ -8,13 +8,21 @@
     width: 70%;
 }
 
-.match-card h3{
+.match-card h3,
+.match-card a {
     color:black;
     font-family: 'DM Sans', Helvetica, sans-serif;
     text-align: left;
     font-weight: 600;
     padding:0%;
+}
 
+.match-card a {
+    text-decoration: none;
+}
+
+.match-card a:hover {
+    text-decoration: underline;
 }
 
 .match-card p{
@@ -23,7 +31,7 @@
     font-size: large;
 }
 
-.match-card a {
+.match-card .email-address a {
     font-family: 'DM-Sans', Helvetica, sans-serif;
     color: #e97642;
     font-size: large;
@@ -31,7 +39,7 @@
     text-decoration: none;
 }
 
-.match-card a:hover {
+.match-card .email-address a:hover {
     color: #bd6237;
     text-decoration: underline;
 }
