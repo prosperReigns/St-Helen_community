@@ -15,10 +15,6 @@
     border-radius: 10px;
 }
 
-.post-container p {
-    font-size: small;
-}
-
 .post-container .time-created {
     font-size: x-small;
 }

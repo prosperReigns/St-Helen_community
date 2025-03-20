@@ -214,7 +214,7 @@ def likepost(request):
 def profileview(request, username): #takes in the username of the user who's profile you want to see
     user_object = User.objects.get(username=username) #creates an object of that user 
     user_profile = Profile.objects.get(user=user_object) #gets that user's profile
-    user_posts = Post.objects.filter(user=user_object) #get all the posts posted by that user 
+    user_posts = Post.objects.filter(user=user_object).order_by("-created_at") #get all the posts posted by that user 
 
     context = {
         "user_object": user_object,
