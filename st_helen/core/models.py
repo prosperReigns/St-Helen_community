@@ -75,3 +75,24 @@ class Student(models.Model):
     
     def __str__(self):
         return f"{self.user}"
+    
+class Club (models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4) #gives each club a unique ID and makes this the primary key
+    club_name = models.CharField(max_length=100) #each club has a unique name (validation should exist in the view)
+    image = models.ImageField(upload_to='club_profile_images', default='blank_club_profile_image') #upload the image to the folder, default is the blank image
+    description = models.TextField(blank=True) #each club should have a description
+    
+    CLUB_CATEGORIES = [
+        ('Academic', 'Academic & Professional'),
+        ('Sport', 'Sports & Recreation'),
+        ('Arts', 'Arts & Creativity'),
+        ('Identity', 'Culture & Identity Based'),
+        ('Community', 'Community Service & Social Impact'),
+        ('Interests', 'Special Interests & Hobbies'),
+        ('Other', 'Other')
+    ]
+
+    club_category = models.CharField(choices=CLUB_CATEGORIES, max_length=30, blank=True, null=True) #each club has a category 
+
+    def __str__(self):
+        return self.club_name #returns the club name 

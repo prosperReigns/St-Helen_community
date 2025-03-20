@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import Profile, Post, LikePost, Question, Option, Response, Student #imports LikePost, Posts, Questions, Option and Response from the current directory
+from .models import Profile, Post, LikePost, Question, Option, Response, Student, Club #imports LikePost, Posts, Questions, Option and Response from the current directory
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout 
 from .functions.matching import calculate_match_score
@@ -171,7 +171,8 @@ def connect(request):
 
 @login_required(login_url="login")
 def discover(request):
-    return render (request, 'discover.html')
+    club=Club.objects.all().order_by("id") #show all clubs, order them by their id
+    return render(request, 'discover.html', {"clubs":club}) #render the discover.html page
 
 
 @login_required(login_url="login")
