@@ -79,7 +79,7 @@ class Student(models.Model):
 class Club (models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4) #gives each club a unique ID and makes this the primary key
     club_name = models.CharField(max_length=100) #each club has a unique name (validation should exist in the view)
-    image = models.ImageField(upload_to='club_profile_images', default='blank_club_profile_image') #upload the image to the folder, default is the blank image
+    image = models.ImageField(upload_to='club_profile_images', default='blank_club_profile_image.png') #upload the image to the folder, default is the blank image
     description = models.TextField(blank=True) #each club should have a description
     
     CLUB_CATEGORIES = [
