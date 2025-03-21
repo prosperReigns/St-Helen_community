@@ -24,4 +24,20 @@
     <p><a href="{% url 'profile' user.username %}"> {{user.username}}'s profile </a></p>
 </div>
 
+
+
+<h2>Clubs</h2>
+
+{% for club in clubs %}
+    <div class="clubs">
+        <p>{{ club.club_name }}</a><!--displays the poster's username at the top of the post-->  
+        <img src="{{club.image.url}}" alt="Club profile image">
+        <p>{{club.description}}</p>
+        <p>{{club.club_category}}</p>
+    </div>
+
+{% empty %}
+    <p>No clubs yet. Come back later!</p> <!--if there are no posts, put empty message-->
+{% endfor %}
+
 {% endblock %}
