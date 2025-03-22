@@ -2,47 +2,49 @@
 {% load static %}
 
 {% block title %} Sign Up {% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'core/signup.css' %}">
+{% endblock %}
+
 
 {% block content %}
-    <h1>Sign Up</h1>
-    <h2>Create an account to get started</h2>
-    <form action="" method="POST"> 
-        {% for message in messages %}
-        <p style="color:red; text-align:center;font-weight: bold; font-family: 'DM Sans', Helvetica, sans-serif;">{{message}}</p>
-        {% endfor %}
+<div class="display">
+<p>FriendHer</p>
+</div>
+
+<div class="sign-up">
+<h1>Sign Up</h1>
+<h2>Create an account to get started</h2>
+<form action="" method="POST"> 
+    {% for message in messages %}
+    <p style="color:red; text-align:center;font-weight: bold; font-family: 'DM Sans', Helvetica, sans-serif;">{{message}}</p>
+    {% endfor %}
 
        
-        {% csrf_token %} <!-- prevents it getting hacked -->
-        <div class="form-control">
-            <label for="uname">username</label>
-            <input type="text" name="username" id="uname">
-        </div>
-        <p></p>
+    {% csrf_token %} <!-- prevents it getting hacked -->
+    <div class="form-control">
+        <label for="uname">username</label>
+        <input type="text" name="username" id="uname">
+    </div>
 
-
-        <div class="form-control">
-            <label for="email">email</label>
-            <input type="email" name="email" id="email">
-        </div>
-        <p></p>
-
+    <div class="form-control">
+        <label for="email">email</label>
+        <input type="email" name="email" id="email">
+    </div>
         
-        <div class="form-control">
-            <label for="password">password</label>
-            <input type="password" name="password" id="password">
-        </div>
-        <p></p>
-
+    <div class="form-control">
+        <label for="password">password</label>
+        <input type="password" name="password" id="password">
+    </div>
         
-        <div class="form-control">
-            <label for="password2">confirm password</label>
-            <input type="password" name="password2" id="password2">
-        </div>
-
-        <p> </p>
+    <div class="form-control">
+        <label for="password2">confirm password</label>
+        <input type="password" name="password2" id="password2">
+    </div>
       
-        <div class="form-control">
-            <button type="submit">register</button>
-        </div>
-    </form>
+    <div class="form-control">
+        <button type="submit">register</button>
+    </div>
+</form>
+</div>
 {% endblock %}
