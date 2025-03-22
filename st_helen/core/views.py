@@ -171,13 +171,17 @@ def connect(request):
 
 @login_required(login_url="login")
 def discover(request):
-    club=Club.objects.all().order_by("id") #show all clubs, order them by their id
-    return render(request, 'discover.html', {"clubs":club}) #render the discover.html page
+    category = request.GET.get('category') #get the parameters necessary for the filter 
+    clubs=Club.objects.all().order_by("id") #show all clubs, order them by their id
+
+    if category: #if a category is passed 
+        clubs = clubs.filter(club_category=category) #'clubs' variable now becomes all clubs under this category
+
+    return render(request, 'discover.html', {"clubs":clubs}) #render the discover.html page
 
 
 @login_required(login_url="login")
 def makepost(request):
-    
     if request.method == 'POST':
         user = request.user #retrieves the username of the user from the form
         image = request.FILES.get('image_upload') #retrieves the image to be posted from form

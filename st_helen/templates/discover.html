@@ -3,7 +3,7 @@
 
 {% block title %} discover page {% endblock %}
 {% block style %}
-<link rel="stylesheet" href="{% static 'core/post_style.css' %}">
+<link rel="stylesheet" href="{% static 'core/clubs.css' %}">
 <link rel="stylesheet" href="{% static 'core/style.css' %}">
 <link rel="stylesheet" href="{% static 'core/nav.css' %}">
 {% endblock %}
@@ -24,20 +24,43 @@
     <p><a href="{% url 'profile' user.username %}"> {{user.username}}'s profile </a></p>
 </div>
 
+<div class="filter-form"> <!--create a filter form-->
+    <form method="GET" action="{% url 'discover' %}">
+        
+        <label for="category"><i class="fa-solid fa-rectangle-list fa-lg"></i></label> <!--show a filter icon-->
+        <select name="category" id = "category"> <!--option to select a category, pass to the view-->
+            <option value ="">All Categories</option> <!--if there's no category, show all categories-->
+            <option value="Academic">Academic & Professional</option> <!--value of the option is the same as tuple from the model-->
+            <option value="Sport">Sports & Recreational</option> <!--display the full form as the option (on frontend)-->
+            <option value="Arts">Arts & Creativity</option>
+            <option value="Identity">Culture & Identity Based</option>
+            <option value="Community">Community Service & Social Impact </option>
+            <option value="Interests">Special Interests & Hobbies</option>
+            <option value="Other">Other</option>
+        </select>
 
+        <button type="submit" class ="filter-button"> Filter </button> <!--submit the category to the backend-->
+
+    </form>
+</div>
 
 <h2>Clubs</h2>
 
 {% for club in clubs %}
-    <div class="clubs">
-        <p>{{ club.club_name }}</a><!--displays the poster's username at the top of the post-->  
-        <img src="{{club.image.url}}" alt="Club profile image">
-        <p>{{club.description}}</p>
-        <p>{{club.club_category}}</p>
+    <div class="club-container">
+        <img src="{{club.image.url}}" alt="Club profile image"> <!--get profile image-->
+        <div class = "text-container">
+            <h3> {{ club.club_name }} <!--gets the club name-->
+                <span class ="club-category"> 
+                    <p> {{club.get_club_category_display}} </p> <!--gets the DISPLAY form of the club category-->
+                </span>
+            </h3>
+            <p>{{club.description}}</p> <!--get the description-->
+        </div>
     </div>
 
 {% empty %}
-    <p>No clubs yet. Come back later!</p> <!--if there are no posts, put empty message-->
+    <h3>No clubs yet. Please contact your admin or come back later!</h3> <!--if there are no posts, put empty message-->
 {% endfor %}
 
 {% endblock %}
