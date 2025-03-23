@@ -9,7 +9,8 @@
 
 {% block content %}
 <div class="display">
-<p>FriendHer</p>
+<h4>FriendHer</h4>
+<img src="/media/sign_up_image.png" alt="Signup Image">
 </div>
 
 <div class="sign-up">
@@ -17,34 +18,29 @@
 <h2>Create an account to get started</h2>
 <form action="" method="POST"> 
     {% for message in messages %}
-    <p style="color:red; text-align:center;font-weight: bold; font-family: 'DM Sans', Helvetica, sans-serif;">{{message}}</p>
+    <p style="color:red; text-align:center;font-weight: bold; font-family: 'DM Sans', Helvetica, sans-serif;"><i class ="fa-solid fa-circle-xmark"></i> {{message}}</p>
     {% endfor %}
 
        
     {% csrf_token %} <!-- prevents it getting hacked -->
-    <div class="form-control">
-        <label for="uname">username</label>
+    <div class ="form-control">
+        <label for="uname">Username</label>
         <input type="text" name="username" id="uname">
-    </div>
 
-    <div class="form-control">
-        <label for="email">email</label>
+        <label for="email">Email</label>
         <input type="email" name="email" id="email">
-    </div>
         
-    <div class="form-control">
-        <label for="password">password</label>
+        <label for="password">Password</label>
         <input type="password" name="password" id="password">
-    </div>
         
-    <div class="form-control">
-        <label for="password2">confirm password</label>
+        <label for="password2">Confirm password</label>
         <input type="password" name="password2" id="password2">
-    </div>
-      
-    <div class="form-control">
-        <button type="submit">register</button>
+        
+        <button type="submit">REGISTER</button>
     </div>
 </form>
+
+<img src="/media/st_helen_logo.png" alt="Logo">
+
 </div>
 {% endblock %}

@@ -10,5 +10,99 @@ body {
     width: 40%;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+.display img {
+    width: 100%;
+    height:auto;
+    margin-bottom: 0;
+    padding: 0;
+    margin-top: auto;
+}
+
+.display h4 {
+    font-family: 'DM Sans', Helvetica, sans-serif;
+    font-size: 350%;
+    color: black;
+    text-align: center;
+    font-weight: 300;
+    margin-top: 120px;
+}
+
+.sign-up {
+    align-items: center;
+    width: 60%;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+}
+
+.sign-up form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-control {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(235, 233, 233);
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.sign-up input {
+    padding: 0;
+    font-size: 140%;
+    font-family: 'DM Sans', Helvetica, sans-serif;
+    font-weight: 300;
+    margin-bottom: 5%;
+}
+
+.sign-up label {
+    font-size: 100%;
+    font-family: 'DM Sans', Helvetica, sans-serif;
+    font-weight: 400;
+    align-self: flex-start
+}
+
+.sign-up h1 {
+    font-weight: 500;
+    font-size: 250%;
+    margin-bottom: 0;
+    margin-top: 10%;
+}
+
+.sign-up h2 {
+    font-weight: 500;
+    font-size: 170%;
+}
+
+.sign-up button {
+    padding: 2%;
+    margin-top: 3%;
+    font-size: 120%;
+    font-family: 'DM Sans', Helvetica, sans-serif;
+    font-weight: 400;
+    width: 40%;
+    align-self: center;
+    background-color:#146344;
+    color: white;
+    border-color: white;
+}
+
+.sign-up button:hover {
+    background-color:#0e462f;
+}
+
+.sign-up img {
+    position: absolute;
+    bottom: 20px;        
+    right: 20px;         
+    width: 50px;        
+    height: auto; 
 }
