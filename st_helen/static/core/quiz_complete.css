@@ -1,6 +1,33 @@
-.img {
-    width: 50%;
+img {
+    width: 15%;
     height: auto;
-    margin-inline: auto;
+    display: block;
+    margin: auto;
+    margin-top: 10%;
 }
 
+.quiz_complete p {
+    font-size: 150%;
+    font-weight: 300;
+}
+
+.quiz_complete h1 {
+    font-weight: 500;
+    font-size: 250%;
+}
+
+.quiz_complete button {
+    padding: 1%;
+    font-size: 120%;
+    font-family: 'DM Sans', Helvetica, sans-serif;
+    font-weight: 400;
+    align-self: center;
+    background-color:lightgrey;
+    border-radius: 10px;
+    color: black;
+    border-color: white;
+}
+
+.quiz_complete button:hover {
+    background-color:rgb(185, 185, 185);
+}
