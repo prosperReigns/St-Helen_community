@@ -2,30 +2,34 @@
 {% load static %}
 
 {% block title %} student quiz {% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'core/quiz.css' %}"> <!--link in stylesheet-->
+{% endblock %}
 
 {% block content %}
     <h1>Let's get matching!</h1>
 
-    <div class ="quiz">
-    <form method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="question_id" value="{{question.id}}">
-        <h2>{{ question.question }}</h2> <!-- displays the question -->
-
-        {% for option in question.options.all %}
-        <div>
-            <label>
-                <input type="radio" name="chosen_option" value="{{option.id}}" required> <!--a radio button for each option-->
-                <h3>{{option.option}}</h3> <!--shows the text of the option-->
-            </label>
-        </div>
-        {% endfor %}
-
-        <div class="btn-container">
-            <button type="submit">Next</button>
-        </div>
-    </form>
+    <div class="quiz"> 
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="question_id" value="{{question.id}}"> <!--take in the question_id from the view as input-->
+            <h2>{{ question.question }}</h2> <!--show the question associated with that id-->
+    
+            <div class="options-container">
+                {% for option in question.options.all %} <!--for all the options associated with the question-->
+                    <label>
+                        <input type="radio" name="chosen_option" value="{{option.id}}" required> <!--display a radio button-->
+                        <p>{{ option.option }}</p> <!--display the option-->
+                    </label>
+                {% endfor %}
+            </div>
+    
+            <div class="btn-container"> 
+                <button type="submit">Next</button> <!--submit the response, show next question-->
+            </div>
+        </form>
     </div>
+    
 
 
 {% endblock %}
