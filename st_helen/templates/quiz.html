@@ -4,8 +4,9 @@
 {% block title %} student quiz {% endblock %}
 
 {% block content %}
-    <h1>Quiz</h1>
+    <h1>Let's get matching!</h1>
 
+    <div class ="quiz">
     <form method="POST">
         {% csrf_token %}
         <input type="hidden" name="question_id" value="{{question.id}}">
@@ -23,8 +24,8 @@
         <div class="btn-container">
             <button type="submit">Next</button>
         </div>
-   
     </form>
+    </div>
 
 
 {% endblock %}

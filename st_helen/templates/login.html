@@ -2,34 +2,43 @@
 {% load static %}
 
 {% block title %} log in {% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'core/login.css' %}">
+{% endblock %}
 
 {% block content %}
-    <h1>FriendHer</h1>
+<div class="display">
+<h4>FriendHer</h4>
+<img src="/media/log_in_image.png" alt="Login Image">
+</div>
 
-    <h2>log in here</h2>
+<div class ="log-in">
+    <h1>Welcome Back</h1>
+    <h2>Log in here</h2>
 
     <form action="" method="POST"> 
         {% for message in messages %}
-        <p>{{message}}</p>
+        <p style="color:red; text-align:center;font-weight: bold; font-family: 'DM Sans', Helvetica, sans-serif;"><i class ="fa-solid fa-circle-xmark"></i> {{message}}</p>
         {% endfor %}
 
         {% csrf_token %} <!-- this prevents it getting hacked -->
         <div class="form-control">
             <label for="uname">username</label>
             <input type="text" name="username" id="uname">
-        </div>
-        <div class="form-control">
+        
             <label for="password">password</label>
             <input type="password" name="password" id="password">
-        </div>
-        <p></p>
-        <div class="btn-container"> 
-            <button type="Log in">Log in</button>
-        </div>
-        <p style="font-family: 'DM Sans', sans-serif; text-align: center;">Don't have an account?</p>
-        <div class="btn-container">
-            <button type="button" onclick="window.location.href='/signup'">Create an account</button>
-        </div>
 
+            <button type="Log in">Log in</button>
+ 
+            <p style="font-family: 'DM Sans', sans-serif; text-align: center;">Don't have an account?</p>
+            
+            <button type="button" onclick="window.location.href='/signup'" class="create-account">Create an account</button>
+        </div>
+    </form>
+
+    <img src="/media/st_helen_logo.png" alt="Logo">
+
+</div>
 
 {% endblock %}

@@ -94,6 +94,10 @@ def login(request):
             
             if user_login is not None: #checks if the user login exists
                 auth.login(request, user_login)
+
+                if user_login.is_superuser: #redirect to admin page if admin credentials are accurate
+                    return redirect("/admin/")
+
                 return redirect("/")
             else:
                 messages.info(request, "Invalid credentials") #user doesn't exist message 
