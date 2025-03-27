@@ -33,6 +33,11 @@ def signup(request):
             elif username == "": #checks if username is empty
                 messages.info(request, "Username cannot be empty")
                 return redirect("signup")
+            
+            elif len(password) <8: #adding a minimum length of characters for password 
+                messages.info(request, "Password must be at least 8 characters long")
+                return redirect ("signup")
+            
             else:
                 user = User.objects.create_user(username=username, email=email, password=password) #creates a user in the database
                 user.save()
